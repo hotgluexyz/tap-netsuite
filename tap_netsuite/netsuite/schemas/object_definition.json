@@ -1,0 +1,22 @@
+{
+  "Customer": [
+    {"displayName": "Taxable", "name": "taxable", "type": "boolean"},
+    {"displayName": "Id", "name": "internalId", "type": "string"},
+    {"displayName": "lastModifiedDate", "name": "lastModifiedDate", "type": "datetime"},
+    {"displayName": "Name", "name": "entityId", "type": "string"},
+    {"displayName": "Status", "name": "entityStatus", "type": "string"},
+    {"displayName": "Email", "name": "email", "type": "string"},
+    {"displayName": "DateCreated", "name": "dateCreated", "type": "datetime"},
+    {"displayName": "Subsidiary", "name": "subsidiary", "type": "string"}
+  ],
+  "Accounts": [
+    {"displayName": "Active", "name": "isInactive", "type": "boolean"},
+    {"displayName": "ParentAccount", "name": "parent", "type": "string"},
+    {"displayName": "AcctNum", "name": "acctNumber", "type": "string"},
+    {"displayName": "AccountType", "name": "acctType", "type": "string"},
+    {"displayName": "Name", "name": "acctName", "type": "string"},
+    {"displayName": "Description", "name": "description", "type": "string"},
+    {"displayName": "CurrencyRef", "name": "currency", "type": "string"},
+    {"displayName": "Id", "name": "internalId", "type": "string"}
+  ]
+}

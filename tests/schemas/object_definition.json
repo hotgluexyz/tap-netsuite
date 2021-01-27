@@ -1,0 +1,38 @@
+{
+  "Customer": [
+    {"displayName": "Taxable", "name": "taxable", "type": "boolean"},
+    {"displayName": "Id", "name": "internalId", "type": "string"},
+    {"displayName": "lastModifiedDate", "name": "lastModifiedDate", "type": "datetime"},
+    {"displayName": "Name", "name": "entityId", "type": "string"},
+    {"displayName": "Status", "name": "entityStatus", "type": "string"},
+    {"displayName": "Email", "name": "email", "type": "string"},
+    {"displayName": "DateCreated", "name": "dateCreated", "type": "datetime"},
+    {"displayName": "Subsidiary", "name": "subsidiary", "type": "string"}
+  ],
+  "SalesOrder": [
+    {"displayName": "lastModifiedDate", "name": "lastModifiedDate", "type": "datetime"},
+    {"displayName": "Status", "name": "status", "type": "string"},
+    {"displayName": "Items", "name": "itemList", "type": "array", "child_type": "items_line"},
+    {"displayName": "Id", "name": "internalId", "type": "string"},
+    {"displayName": "CustomFieldList", "name": "customFieldList", "type": "string"},
+    {"displayName": "Creation Date", "name": "createdDate", "type": "datetime"},
+    {"displayName": "Custom Form", "name": "customForm", "type": "string"},
+    {"displayName": "Customer", "name": "entity", "type": "string"},
+    {"displayName": "Currency", "name": "currency", "type": "string"},
+    {"displayName": "TranDate", "name": "tranDate", "type": "datetime"},
+    {"displayName": "TranId", "name": "tranId", "type": "string"},
+    {"displayName": "SalesRep", "name": "salesRep", "type": "string"},
+    {"displayName": "Memo", "name": "memo", "type": "string"},
+    {"displayName": "ExchangeRate", "name": "exchangeRate", "type": "number"},
+    {"displayName": "TaxItem", "name": "taxItem", "type": "string"},
+    {"displayName": "TaxRate", "name": "taxRate", "type": "number"},
+    {"displayName": "BillingAddress", "name": "billingAddress", "type": "string"},
+    {"displayName": "ShippingAddress", "name": "shippingAddress", "type": "string"},
+    {"displayName": "ShipDate", "name": "shipDate", "type": "datetime"},
+    {"displayName": "SubTotal", "name": "subTotal", "type": "number"},
+    {"displayName": "DiscountTotal", "name": "discountTotal", "type": "number"},
+    {"displayName": "Total", "name": "total", "type": "number"},
+    {"displayName": "Balance", "name": "balance", "type": "number"},
+    {"displayName": "Subsidiary", "name": "subsidiary", "type": "string"}
+  ]
+}

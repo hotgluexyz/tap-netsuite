@@ -1,0 +1,291 @@
+{
+  "JournalEntries": [
+    {
+      "nullFieldList": null,
+      "postingPeriod": null,
+      "tranDate": "2017-05-31 00:00:00-07:00",
+      "currency": {
+        "name": "USD",
+        "internalId": "1",
+        "externalId": null,
+        "type": null
+      },
+      "exchangeRate": 1.0,
+      "tranId": "JE000008",
+      "reversalDate": null,
+      "reversalDefer": null,
+      "parentExpenseAlloc": null,
+      "isBookSpecific": null,
+      "accountingBook": null,
+      "reversalEntry": null,
+      "createdFrom": null,
+      "department": null,
+      "class": null,
+      "location": null,
+      "subsidiary": {
+        "name": "Gem Software, Inc.",
+        "internalId": "1",
+        "externalId": null,
+        "type": null
+      },
+      "nexus": null,
+      "subsidiaryTaxRegNum": null,
+      "taxPointDate": null,
+      "memo": "2017 TB",
+      "toSubsidiary": null,
+      "approved": null,
+      "createdDate": "2020-10-23 19:40:55-07:00",
+      "lastModifiedDate": "2020-10-23 19:40:55-07:00",
+      "customForm": null,
+      "lineList": null,
+      "accountingBookDetailList": null,
+      "customFieldList": {
+        "customField": [
+          {
+            "value": false,
+            "internalId": "375",
+            "scriptId": "custbody_adjustment_journal"
+          },
+          {
+            "value": {
+              "name": "No",
+              "internalId": "2",
+              "externalId": null,
+              "typeId": "27"
+            },
+            "internalId": "119",
+            "scriptId": "custbody_atlas_no_hdn"
+          },
+          {
+            "value": {
+              "name": "Yes",
+              "internalId": "1",
+              "externalId": null,
+              "typeId": "27"
+            },
+            "internalId": "117",
+            "scriptId": "custbody_atlas_yes_hdn"
+          },
+          {
+            "value": false,
+            "internalId": "407",
+            "scriptId": "custbody_cash_register"
+          },
+          {
+            "value": "23/10/2020 19:40:54",
+            "internalId": "393",
+            "scriptId": "custbody_report_timestamp"
+          },
+          {
+            "value": false,
+            "internalId": "609",
+            "scriptId": "custbody_sii_article_61d"
+          },
+          {
+            "value": false,
+            "internalId": "607",
+            "scriptId": "custbody_sii_article_72_73"
+          },
+          {
+            "value": false,
+            "internalId": "608",
+            "scriptId": "custbody_sii_not_reported_in_time"
+          }
+        ]
+      },
+      "internalId": "1028",
+      "externalId": "TBMay2017"
+    }
+  ],
+  "accounts": [
+    {
+      "nullFieldList": null,
+      "acctType": "_bank",
+      "unitsType": null,
+      "unit": null,
+      "acctNumber": "1000",
+      "acctName": "Cash and Equivalents",
+      "legalName": null,
+      "includeChildren": false,
+      "currency": {
+        "name": "USD",
+        "internalId": "1",
+        "externalId": null,
+        "type": null
+      },
+      "exchangeRate": null,
+      "generalRate": "_current",
+      "parent": null,
+      "cashFlowRate": "_average",
+      "billableExpensesAcct": null,
+      "deferralAcct": null,
+      "description": null,
+      "curDocNum": null,
+      "isInactive": true,
+      "department": null,
+      "class": null,
+      "location": null,
+      "restrictToAccountingBookList": null,
+      "inventory": null,
+      "eliminate": false,
+      "subsidiaryList": null,
+      "category1099misc": null,
+      "localizationsList": null,
+      "openingBalance": null,
+      "tranDate": null,
+      "revalue": false,
+      "customFieldList": {
+        "customField": [
+          {
+            "value": false,
+            "internalId": "574",
+            "scriptId": "custrecord_has_mx_localization"
+          }
+        ]
+      },
+      "internalId": "1",
+      "externalId": null
+    }
+  ],
+  "VendorBills": [],
+  "ExpenseReports": [
+    {
+      "nullFieldList": null,
+      "customForm": null,
+      "template": null,
+      "entityId": "Temi Vasco",
+      "salutation": null,
+      "firstName": "Temi",
+      "middleName": null,
+      "lastName": "Vasco",
+      "altName": null,
+      "phone": null,
+      "fax": null,
+      "email": "temi@gem.com",
+      "defaultAddress": null,
+      "isInactive": false,
+      "phoneticName": null,
+      "lastModifiedDate": "2020-11-23 15:48:08-08:00",
+      "dateCreated": "2020-09-01 12:16:18-07:00",
+      "initials": "TV",
+      "officePhone": null,
+      "homePhone": null,
+      "mobilePhone": null,
+      "department": null,
+      "class": null,
+      "location": null,
+      "subsidiary": {
+        "name": "Gem Software, Inc.",
+        "internalId": "1",
+        "externalId": null,
+        "type": null
+      },
+      "billingClass": null,
+      "accountNumber": null,
+      "compensationCurrency": null,
+      "baseWageType": null,
+      "baseWage": null,
+      "comments": null,
+      "globalSubscriptionStatus": "_softOptOut",
+      "image": null,
+      "payFrequency": null,
+      "lastPaidDate": null,
+      "currency": {
+        "name": "USD",
+        "internalId": "1",
+        "externalId": null,
+        "type": null
+      },
+      "useTimeData": null,
+      "usePerquest": null,
+      "workplace": null,
+      "adpId": null,
+      "directDeposit": null,
+      "expenseLimit": null,
+      "purchaseOrderLimit": 0.0,
+      "purchaseOrderApprovalLimit": null,
+      "socialSecurityNumber": null,
+      "supervisor": null,
+      "approver": null,
+      "approvalLimit": null,
+      "timeApprover": null,
+      "employeeType": null,
+      "isSalesRep": true,
+      "salesRole": null,
+      "isSupportRep": null,
+      "isJobResource": null,
+      "laborCost": null,
+      "birthDate": null,
+      "hireDate": null,
+      "releaseDate": null,
+      "terminationDetails": null,
+      "terminationReason": null,
+      "terminationRegretted": null,
+      "terminationCategory": null,
+      "timeOffPlan": null,
+      "lastReviewDate": null,
+      "nextReviewDate": null,
+      "title": null,
+      "employeeStatus": null,
+      "jobDescription": null,
+      "workAssignment": null,
+      "job": null,
+      "maritalStatus": null,
+      "ethnicity": null,
+      "gender": null,
+      "purchaseOrderApprover": null,
+      "workCalendar": null,
+      "giveAccess": true,
+      "defaultExpenseReportCurrency": null,
+      "concurrentWebServicesUser": null,
+      "sendEmail": null,
+      "hasOfflineAccess": null,
+      "password": null,
+      "password2": null,
+      "requirePwdChange": null,
+      "inheritIPRules": null,
+      "IPAddressRule": null,
+      "startDateTimeOffCalc": null,
+      "commissionPaymentPreference": "_systemPreference",
+      "billPay": null,
+      "defaultAcctCorpCardExp": null,
+      "eligibleForCommission": null,
+      "subscriptionsList": null,
+      "ratesList": null,
+      "addressbookList": null,
+      "rolesList": null,
+      "hrEducationList": null,
+      "accruedTimeList": null,
+      "directDepositList": null,
+      "currencyList": null,
+      "companyContributionList": null,
+      "earningList": null,
+      "emergencyContactList": null,
+      "hcmPositionList": null,
+      "deductionList": null,
+      "customFieldList": {
+        "customField": [
+          {
+            "value": {
+              "name": "Link",
+              "internalId": "2",
+              "externalId": null,
+              "typeId": "29"
+            },
+            "internalId": "118",
+            "scriptId": "custentity_atlas_link_hdn"
+          },
+          {
+            "value": "2020-11-23 00:00:00-08:00",
+            "internalId": "30",
+            "scriptId": "custentity_esc_last_modified_date"
+          }
+        ]
+      },
+      "internalId": "-5",
+      "externalId": null
+    }
+  ],
+  "Projects": [],
+  "VendorPayments": []
+}

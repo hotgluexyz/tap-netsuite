@@ -1,0 +1,323 @@
+{
+    "streams": [
+        {
+            "stream": "Customer",
+            "tap_stream_id": "Customer",
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "Taxable": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "Id": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "lastModifiedDate": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            }
+                        ]
+                    },
+                    "Name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "Status": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "Email": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "DateCreated": {
+                        "anyOf": [
+                            {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ]
+                            }
+                        ]
+                    },
+                    "Subsidiary": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                }
+            },
+            "metadata": [
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Taxable"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Id"
+                    ],
+                    "metadata": {
+                        "inclusion": "automatic",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "lastModifiedDate"
+                    ],
+                    "metadata": {
+                        "inclusion": "automatic",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Name"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Status"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Email"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "DateCreated"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Subsidiary"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [],
+                    "metadata": {
+                        "valid-replication-keys": [
+                            "lastModifiedDate"
+                        ],
+                        "table-key-properties": [
+                            "Id"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "stream": "Accounts",
+            "tap_stream_id": "Accounts",
+            "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                    "Active": {
+                        "type": [
+                            "boolean",
+                            "null"
+                        ]
+                    },
+                    "ParentAccount": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "AcctNum": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "AccountType": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "Name": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "Description": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "CurrencyRef": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "Id": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    }
+                }
+            },
+            "metadata": [
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Active"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "ParentAccount"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "AcctNum"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "AccountType"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Name"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Description"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "CurrencyRef"
+                    ],
+                    "metadata": {
+                        "inclusion": "available",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [
+                        "properties",
+                        "Id"
+                    ],
+                    "metadata": {
+                        "inclusion": "automatic",
+                        "selected-by-default": true
+                    }
+                },
+                {
+                    "breadcrumb": [],
+                    "metadata": {
+                        "forced-replication-method": {
+                            "replication-method": "FULL_TABLE",
+                            "reason": "No replication keys found from the NetSuite API"
+                        },
+                        "table-key-properties": [
+                            "Id"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

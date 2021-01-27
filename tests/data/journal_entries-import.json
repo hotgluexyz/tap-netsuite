@@ -1,0 +1,66 @@
+{
+  "postingPeriod": "202012",
+  "tranDate": "2020-12-23T00:00:00Z",
+  "currency": {
+    "name": "USD",
+    "internalId": "1",
+    "externalId": null,
+    "type": null
+  },
+  "tranId": "JE000009-Test",
+  "subsidiary": {
+    "name": "Gem Software, Inc.",
+    "internalId": "1",
+    "externalId": null,
+    "type": null
+  },
+  "customForm": {
+    "name": "Standard Journal Entry",
+    "internalId": "30",
+    "externalId": null,
+    "type": null
+  },
+  "customFieldList": null,
+  "lineList": [
+    {
+      "account": {
+        "name": "2105 Deferred Revenue",
+        "internalId": "214",
+        "externalId": null,
+        "type": null
+      },
+      "debit": 668.33,
+      "credit": null,
+      "memo": "Rev Rec Source",
+      "entity": {
+        "name": "17 Realtor.com",
+        "internalId": "1014",
+        "externalId": null,
+        "type": null
+      },
+      "department": null,
+      "class": null
+    },
+    {
+      "account": {
+        "name": "4005 Revenue : Service Revenue",
+        "internalId": "309",
+        "externalId": null,
+        "type": null
+      },
+      "debit": null,
+      "credit": 668.33,
+      "memo": "Rev Rec Destination",
+      "taxRate1": null,
+      "entity": {
+        "name": "1 TEST CUSTOMER",
+        "internalId": "9",
+        "externalId": null,
+        "type": null
+      },
+      "department": null,
+      "class": null
+    }
+  ],
+  "externalId": "1234-Test"
+}

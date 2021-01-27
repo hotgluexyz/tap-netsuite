@@ -1,0 +1,11 @@
+{
+  "ns_account":"6798012",
+  "ns_consumer_key":"139d6f80d189ea52d2fe77207867b8c6c6d7bda872cc3f1a40e9be7fd17dd53c",
+  "ns_consumer_secret":"c3be7225496b40bcdb70dbeb9a139983234debba1bc1c1262d86689c83daf761",
+  "ns_token_key":"9a0e7a1bbcbfc1b85cc6b504e37240d12051d8c698640a42fb19083884496a49",
+  "ns_token_secret" :"66adbe894078b9586c35a4e0082736b12885fe8948db1c0ac82137cb39fb13c8",
+  "select_fields_by_default": true,
+  "is_sandbox": true,
+  "start_date": "2019-09-02T00:00:00Z"
+}
+
