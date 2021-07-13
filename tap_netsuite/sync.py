@@ -123,6 +123,7 @@ def sync_records(ns, catalog_entry, state, counter):
         if replication_key:
             _rec = rec.get(replication_key, None)
             original_replication_key_value = ""
+            replication_key_value = None
             if replication_key and _rec is not None:
                 original_replication_key_value = _rec
                 replication_key_value = singer_utils.strptime_with_tz(original_replication_key_value)
