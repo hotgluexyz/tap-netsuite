@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='tap-netsuite',
-    version='1.4.29',
+    version='1.4.30',
     description='Singer.io tap for extracting data from the NetSuite SOAP',
     author='hotglue',
     url='https://hotglue.xyz/',

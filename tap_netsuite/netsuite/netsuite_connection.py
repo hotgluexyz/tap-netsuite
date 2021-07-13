@@ -61,7 +61,10 @@ class ExtendedNetSuiteConnection:
             'Accounts': Accounts(ns_client),
             'JournalEntry': JournalEntries(ns_client),
             'Commission': JournalEntries(ns_client),
-            'Classifications': Classifications(ns_client)
+            'Classifications': Classifications(ns_client),
+            'Vendors': self.vendors,
+            'VendorBills': self.vendor_bills,
+            'VendorPayment': self.vendor_payments
         }
 
     def _query_entity(self, data, entity, stream):
