@@ -81,5 +81,9 @@
     {"displayName": "ItemList", "name": "itemList", "type": "string"},
     {"displayName": "SubTotal", "name": "subTotal", "type": "string"},
     {"displayName": "Status", "name": "status", "type": "string"}
+  ],
+  "Items": [
+    {"displayName": "Id", "name": "internalId", "type": "string"},
+    {"displayName": "DateCreated", "name": "createdDate", "type": "string"}
   ]
 }

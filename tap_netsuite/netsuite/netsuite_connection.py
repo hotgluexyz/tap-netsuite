@@ -15,6 +15,7 @@ from netsuitesdk.api.expense_categories import ExpenseCategory
 from netsuitesdk.api.custom_lists import CustomLists
 from netsuitesdk.api.custom_records import CustomRecords
 from netsuitesdk.api.vendor_payments import VendorPayments
+from netsuitesdk.api.inventory_item import InventoryItems
 
 import time
 import json
@@ -64,7 +65,8 @@ class ExtendedNetSuiteConnection:
             'Classifications': Classifications(ns_client),
             'Vendors': self.vendors,
             'VendorBills': self.vendor_bills,
-            'VendorPayment': self.vendor_payments
+            'VendorPayment': self.vendor_payments,
+            'Items': InventoryItems(ns_client)
         }
 
     def _query_entity(self, data, entity, stream):
