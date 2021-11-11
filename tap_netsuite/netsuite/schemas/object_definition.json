@@ -82,6 +82,15 @@
     {"displayName": "SubTotal", "name": "subTotal", "type": "string"},
     {"displayName": "Status", "name": "status", "type": "string"}
   ],
+  "Classifications": [
+    {"displayName": "classTranslationList", "name": "classTranslationList", "type": "string"},
+    {"displayName": "customFieldList", "name": "customFieldList", "type": "string"},
+    {"displayName": "includeChildren", "name": "includeChildren", "type": "boolean"},
+    {"displayName": "isInactive", "name": "isInactive", "type": "boolean"},
+    {"displayName": "name", "name": "name", "type": "string"},
+    {"displayName": "parent", "name": "parent", "type": "string"},
+    {"displayName": "subsidiaryList", "name": "subsidiaryList", "type": "string"}
+  ],
   "InventoryTransfer": [
     {"displayName": "ClassRef", "name": "class", "type": "string"},
     {"displayName": "CreatedDate", "name": "createdDate", "type": "datetime"},
