@@ -54,6 +54,27 @@ class Customers(ApiBase):
     def post(self, data) -> OrderedDict:
         return None
 
+class InventoryItem(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='InventoryItem')
+        self.require_lastModified_date = True
+
+    def get_all(self, last_modified_date=None):
+        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
+            last_modified_date=last_modified_date))
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='InventoryItem', operator='contains')
+        search_record = self.ns_client.basic_search_factory(type_name="Item",
+                                                            recordType=record_type_search_field,
+                                                            lastModifiedDate=last_modified_date)
+        ps = PaginatedSearch(client=self.ns_client, type_name='InventoryItem', pageSize=page_size,
+                             search_record=search_record)
+        return self._paginated_search_to_generator(ps)
+
+    def post(self, data) -> OrderedDict:
+        return None
+
 
 class Opportunity(ApiBase):
     def __init__(self, ns_client):
@@ -95,6 +116,52 @@ class SalesOrders(ApiBase):
         paginated_search = PaginatedSearch(client=self.ns_client,
                                            basic_search=basic_search,
                                            type_name='Transaction',
+                                           pageSize=page_size)
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
+    def post(self, data) -> OrderedDict:
+        return None
+
+
+class InventoryTransfer(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='InventoryTransfer')
+    
+    def get_all(self, last_modified_date=None):
+        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
+            last_modified_date=last_modified_date))
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='InventoryTransfer', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('Transaction',
+                                                           recordType=record_type_search_field,
+                                                           lastModifiedDate=last_modified_date)
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           type_name='Transaction',
+                                           basic_search=basic_search,
+                                           pageSize=page_size)
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
+    def post(self, data) -> OrderedDict:
+        return None
+
+
+class InventoryAdjustment(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='InventoryAdjustment')
+    
+    def get_all(self, last_modified_date=None):
+        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
+            last_modified_date=last_modified_date))
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='InventoryAdjustment', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('Transaction',
+                                                           recordType=record_type_search_field,
+                                                           lastModifiedDate=last_modified_date)
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           type_name='Transaction',
+                                           basic_search=basic_search,
                                            pageSize=page_size)
         return self._paginated_search_to_generator(paginated_search=paginated_search)
 
