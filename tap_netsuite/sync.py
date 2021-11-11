@@ -8,6 +8,7 @@ from requests.exceptions import RequestException
 from jsonpath_ng import jsonpath, parse
 import math
 import json
+from zeep.helpers import serialize_object
 
 LOGGER = singer.get_logger()
 
@@ -110,7 +111,7 @@ def sync_records(ns, catalog_entry, state, counter):
 
         counter.increment()
         with Transformer(pre_hook=transform_data_hook(ns, stream)) as transformer:
-            rec = transformer.transform(rec, schema)
+            rec = transformer.transform(serialize_object(rec), schema)
 
         singer.write_message(
             singer.RecordMessage(

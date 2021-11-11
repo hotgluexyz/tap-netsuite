@@ -15,11 +15,12 @@ from netsuitesdk.api.expense_categories import ExpenseCategory
 from netsuitesdk.api.custom_lists import CustomLists
 from netsuitesdk.api.custom_records import CustomRecords
 from netsuitesdk.api.vendor_payments import VendorPayments
+from netsuitesdk.api.price_level import PriceLevel
 
 import time
 import json
 import singer
-from .transaction_entities import Customers, Invoice, JournalEntries
+from .transaction_entities import Customers, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem
 from .netsuite_client import ExtendedNetSuiteClient
 
 LOGGER = singer.get_logger()
@@ -64,7 +65,11 @@ class ExtendedNetSuiteConnection:
             'Classifications': Classifications(ns_client),
             'Vendors': self.vendors,
             'VendorBills': self.vendor_bills,
-            'VendorPayment': self.vendor_payments
+            'VendorPayment': self.vendor_payments,
+            'InventoryAdjustment': InventoryAdjustment(ns_client),
+            'InventoryTransfer': InventoryTransfer(ns_client),
+            'PriceLevel': PriceLevel(ns_client),
+            'InventoryItem': InventoryItem(ns_client),
         }
 
     def _query_entity(self, data, entity, stream):

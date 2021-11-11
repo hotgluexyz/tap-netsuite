@@ -26,7 +26,7 @@ NS_OBJECT_DEFINITIONS = _load_object_definitions()
 NS_OBJECTS = NS_OBJECT_DEFINITIONS.keys()
 
 
-def field_to_property_schema(field, mdata):  # pylint:disable=too-many-branches
+def field_to_property_schema(field):  # pylint:disable=too-many-branches
 
     number_type = {
         "type": [
@@ -86,7 +86,7 @@ def field_to_property_schema(field, mdata):  # pylint:disable=too-many-branches
     ns_type = field['type']
     property_schema = ns_types[ns_type]
 
-    return property_schema, mdata
+    return property_schema
 
 
 class NetSuite:

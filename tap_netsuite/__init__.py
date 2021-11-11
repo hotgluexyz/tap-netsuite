@@ -4,7 +4,7 @@ import sys
 import singer
 import singer.utils as singer_utils
 from singer import metadata, metrics
-import tap_netsuite.netsuite
+import tap_netsuite.netsuite as netsuite
 from tap_netsuite.netsuite import NetSuite
 from tap_netsuite.netsuite.exceptions import TapNetSuiteException, TapNetSuiteQuotaExceededException
 from tap_netsuite.sync import (sync_stream, get_stream_version)
@@ -48,7 +48,7 @@ def create_property_schema(field, mdata):
         mdata = metadata.write(
             mdata, ('properties', field_name_to_write), 'inclusion', 'available')
 
-    property_schema, mdata = netsuite.field_to_property_schema(field, mdata)
+    property_schema = netsuite.field_to_property_schema(field)
 
     return property_schema, mdata
 
@@ -203,9 +203,6 @@ def do_discover(ns):
             property_schema, mdata = create_property_schema(
                 f, mdata)
 
-            inclusion = metadata.get(
-                mdata, ('properties', field_name), 'inclusion')
-
             if ns.select_fields_by_default:
                 mdata = metadata.write(
                     mdata, ('properties', field_name), 'selected-by-default', True)
@@ -291,3 +288,7 @@ def main():
     except Exception as e:
         LOGGER.critical(e)
         raise e
+
+
+if __name__ == '__main__':
+    main()
