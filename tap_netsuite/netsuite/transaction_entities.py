@@ -167,6 +167,51 @@ class InventoryAdjustment(ApiBase):
 
     def post(self, data) -> OrderedDict:
         return None
+    
+
+class VendorBills(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='VendorBills')
+    
+    def get_all(self, last_modified_date=None):
+        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
+            last_modified_date=last_modified_date))
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='VendorBill', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('Transaction',
+                                                           recordType=record_type_search_field,
+                                                           lastModifiedDate=last_modified_date)
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           type_name='Transaction',
+                                           basic_search=basic_search,
+                                           pageSize=page_size)
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
+    def post(self, data) -> OrderedDict:
+        return None
+    
+class VendorPayments(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='VendorPayment')
+    
+    def get_all(self, last_modified_date=None):
+        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
+            last_modified_date=last_modified_date))
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='VendorPayment', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('Transaction',
+                                                           recordType=record_type_search_field,
+                                                           lastModifiedDate=last_modified_date)
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           type_name='Transaction',
+                                           basic_search=basic_search,
+                                           pageSize=page_size)
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
+    def post(self, data) -> OrderedDict:
+        return None
 
 
 class JournalEntries(ApiBase):

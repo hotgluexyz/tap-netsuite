@@ -3,7 +3,6 @@ from netsuitesdk.api.classifications import Classifications
 from netsuitesdk.api.departments import Departments
 from netsuitesdk.api.currencies import Currencies
 from netsuitesdk.api.locations import Locations
-from netsuitesdk.api.vendor_bills import VendorBills
 from netsuitesdk.api.vendors import Vendors
 from netsuitesdk.api.subsidiaries import Subsidiaries
 from netsuitesdk.api.employees import Employees
@@ -14,13 +13,12 @@ from netsuitesdk.api.projects import Projects
 from netsuitesdk.api.expense_categories import ExpenseCategory
 from netsuitesdk.api.custom_lists import CustomLists
 from netsuitesdk.api.custom_records import CustomRecords
-from netsuitesdk.api.vendor_payments import VendorPayments
 from netsuitesdk.api.price_level import PriceLevel
 
 import time
 import json
 import singer
-from .transaction_entities import Customers, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem
+from .transaction_entities import Customers, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem, VendorBills, VendorPayments
 from .netsuite_client import ExtendedNetSuiteClient
 
 LOGGER = singer.get_logger()
