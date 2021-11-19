@@ -37,7 +37,7 @@ def transform_data_hook(ns, stream):
                 result[_property] = data_property
 
             if not typ == 'object':
-                result = json.dumps(data)
+                result = json.dumps(data, default=str)
 
         # NetSuite can return the value '0.0' for integer typed fields. This
         # causes a schema violation. Convert it to '0' if schema['type'] has
