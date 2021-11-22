@@ -103,10 +103,17 @@ class SalesOrders(ApiBase):
     def __init__(self, ns_client):
         ApiBase.__init__(self, ns_client=ns_client, type_name='salesOrder')
         self.require_lastModified_date = True
+    
+    @staticmethod
+    def page_generator(paginated_search):
+        if paginated_search.num_records != 0:
+            num_pages = paginated_search.total_pages
+            for p in range(1, num_pages + 1):
+                paginated_search.goto_page(p)
+                yield paginated_search.records
 
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=100, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='SalesOrder', operator='contains')
@@ -117,7 +124,8 @@ class SalesOrders(ApiBase):
                                            basic_search=basic_search,
                                            type_name='Transaction',
                                            pageSize=page_size)
-        return self._paginated_search_to_generator(paginated_search=paginated_search)
+        
+        return self.page_generator(paginated_search)
 
     def post(self, data) -> OrderedDict:
         return None
@@ -144,6 +152,11 @@ class InventoryTransfer(ApiBase):
 
     def post(self, data) -> OrderedDict:
         return None
+
+
+class Items(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='Item')
 
 
 class InventoryAdjustment(ApiBase):
@@ -287,6 +300,32 @@ class Invoice(ApiBase):
 
     def get_all_generator(self, page_size=100, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='Invoice', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('Transaction',
+                                                           lastModifiedDate=last_modified_date,
+                                                           recordType=record_type_search_field)
+
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           basic_search=basic_search,
+                                           type_name='Transaction',
+                                           pageSize=page_size)
+
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
+    def post(self, data) -> OrderedDict:
+        return None
+
+
+class CreditMemos(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='creditmemo')
+        self.require_paging = True
+        self.require_lastModified_date = True
+
+    def get_all(self, last_modified_date=None):
+        return self.get_all_generator(last_modified_date=last_modified_date)
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='CreditMemo', operator='contains')
         basic_search = self.ns_client.basic_search_factory('Transaction',
                                                            lastModifiedDate=last_modified_date,
                                                            recordType=record_type_search_field)

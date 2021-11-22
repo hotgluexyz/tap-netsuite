@@ -18,7 +18,7 @@ from netsuitesdk.api.price_level import PriceLevel
 import time
 import json
 import singer
-from .transaction_entities import Customers, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem, VendorBills, VendorPayments, SalesOrders
+from .transaction_entities import Customers, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem, VendorBills, VendorPayments, SalesOrders, CreditMemos, Items
 from .netsuite_client import ExtendedNetSuiteClient
 
 LOGGER = singer.get_logger()
@@ -69,6 +69,8 @@ class ExtendedNetSuiteConnection:
             'PriceLevel': PriceLevel(ns_client),
             'InventoryItem': InventoryItem(ns_client),
             'SalesOrders': SalesOrders(ns_client),
+            'CreditMemos': CreditMemos(ns_client),
+            'Items': Items(ns_client)
         }
 
     def _query_entity(self, data, entity, stream):
@@ -92,12 +94,13 @@ class ExtendedNetSuiteConnection:
         else:
             data = entity.get_all()
 
-        if hasattr(entity, 'require_paging') and entity.require_paging is True:
-            transformed_data = json.dumps({stream: data}, default=str, indent=2)
-            data = json.loads(transformed_data)
-            to_return = list(self._query_entity(data, entity, stream))
-        else:
-            to_return = data
+        # It is broken, maybe because of the change in the _paginated_search_to_generator in the API
+        # if hasattr(entity, 'require_paging') and entity.require_paging is True:
+        #     transformed_data = json.dumps({stream: data}, default=str, indent=2)
+        #     data = json.loads(transformed_data)
+        #     to_return = list(self._query_entity(data, entity, stream))
+        # else:
+        to_return = data
 
         LOGGER.info(f"Successfully fetched data for stream {stream}")
         LOGGER.info("--- %s seconds ---" % (time.time() - start_time))
