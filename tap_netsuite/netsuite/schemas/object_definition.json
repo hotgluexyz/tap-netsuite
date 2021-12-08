@@ -777,5 +777,8 @@
     {"displayName": "VsoeSopGroup", "name": "vsoeSopGroup", "type": "string"},
     {"displayName": "Weight", "name": "weight", "type": "number"},
     {"displayName": "WeightUnit", "name": "weightUnit", "type": "string"}
+  ],
+  "PurchaseOrder": [
+    {"displayName": "Id", "name": "internalId", "type": "string"}
   ]
 }

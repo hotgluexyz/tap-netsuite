@@ -339,3 +339,28 @@ class CreditMemos(ApiBase):
 
     def post(self, data) -> OrderedDict:
         return None
+
+class PurchaseOrder(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='purchaseorder')
+        self.require_paging = True
+        self.require_lastModified_date = True
+
+    def get_all(self, last_modified_date=None):
+        return self.get_all_generator(last_modified_date=last_modified_date)
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='Purchase Order', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('Transaction',
+                                                           lastModifiedDate=last_modified_date,
+                                                           recordType=record_type_search_field)
+
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           basic_search=basic_search,
+                                           type_name='Transaction',
+                                           pageSize=page_size)
+
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
+    def post(self, data) -> OrderedDict:
+        return None
