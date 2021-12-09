@@ -342,7 +342,7 @@ class CreditMemos(ApiBase):
 
 class PurchaseOrder(ApiBase):
     def __init__(self, ns_client):
-        ApiBase.__init__(self, ns_client=ns_client, type_name='purchaseorder')
+        ApiBase.__init__(self, ns_client=ns_client, type_name='PurchaseOrder')
         self.require_paging = True
         self.require_lastModified_date = True
 
@@ -350,7 +350,7 @@ class PurchaseOrder(ApiBase):
         return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=100, last_modified_date=None):
-        record_type_search_field = self.ns_client.SearchStringField(searchValue='Purchase Order', operator='contains')
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='PurchaseOrder', operator='contains')
         basic_search = self.ns_client.basic_search_factory('Transaction',
                                                            lastModifiedDate=last_modified_date,
                                                            recordType=record_type_search_field)
