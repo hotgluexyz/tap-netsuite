@@ -109,7 +109,10 @@ def sync_records(ns, catalog_entry, state, counter):
     query_result = query_func(ns, catalog_entry, state)
 
     if not isinstance(query_result, types.GeneratorType):
-        query_result = [query_result]
+        if query_result is not None:
+            query_result = [query_result]
+        else:
+            query_result = []
 
     for page in query_result:
         for rec in page:
