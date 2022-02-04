@@ -217,6 +217,7 @@ def do_discover(ns):
             mdata = metadata.write(
                 mdata, (), 'valid-replication-keys', [replication_key])
             mdata = metadata.write(mdata, (), 'replication-key', replication_key)
+            mdata = metadata.write(mdata, (), 'replication-method', 'INCREMENTAL')
         else:
             mdata = metadata.write(
                 mdata,
