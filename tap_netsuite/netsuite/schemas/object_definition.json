@@ -595,7 +595,7 @@
     {"displayName": "IsTaxable", "name": "isTaxable", "type": "string"},
     {"displayName": "ItemList", "name": "itemList", "type": "string"},
     {"displayName": "Job", "name": "job", "type": "string"},
-    {"displayName": "LastModifiedDate", "name": "lastModifiedDate", "type": "string"},
+    {"displayName": "LastModifiedDate", "name": "lastModifiedDate", "type": "datetime"},
     {"displayName": "LeadSource", "name": "leadSource", "type": "string"},
     {"displayName": "Location", "name": "location", "type": "string"},
     {"displayName": "Memo", "name": "memo", "type": "string"},
