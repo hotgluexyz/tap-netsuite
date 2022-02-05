@@ -129,8 +129,7 @@ def sync_records(ns, catalog_entry, state, counter):
                     time_extracted=start_time))
 
             if replication_key:
-                __rec = {k.lower(): v for k, v in rec.items()}
-                _rec = __rec.get(replication_key.lower(), None)
+                _rec = rec.get(replication_key, None)
                 original_replication_key_value = ""
                 replication_key_value = None
                 if replication_key and _rec is not None:
