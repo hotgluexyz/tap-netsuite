@@ -29,7 +29,7 @@ CONFIG = {
     'start_date': None
 }
 
-REPLICATION_KEY = "lastModifiedDate"
+REPLICATION_KEY = ["lastModifiedDate", "LastModifiedDate", "LastModDate"]
 
 
 def stream_is_selected(mdata):
@@ -209,7 +209,9 @@ def do_discover(ns):
 
             properties[field_name] = property_schema
 
+        replication_key = [f["displayName"] for f in fields if f["displayName"] in replication_key]
         if replication_key:
+            replication_key = replication_key[0]
             mdata = metadata.write(
                 mdata, ('properties', replication_key), 'inclusion', 'automatic')
 
