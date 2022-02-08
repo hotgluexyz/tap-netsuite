@@ -25,7 +25,7 @@ def prepare_custom_fields(that, eod):
                     that.ns_client.SelectCustomFieldRef(
                         scriptId=field['scriptId'] if 'scriptId' in field else None,
                         internalId=field['internalId'] if 'internalId' in field else None,
-                        value=self.ns_client.ListOrRecordRef(
+                        value=that.ns_client.ListOrRecordRef(
                             internalId=field['value']
                         )
                     )
@@ -34,6 +34,43 @@ def prepare_custom_fields(that, eod):
 
     return None
 
+
+class Campaign(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='campaign')
+        self.require_lastModified_date = True
+
+    def get_all(self, last_modified_date=None):
+        return self.get_all_generator(last_modified_date=last_modified_date)
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        search_record = self.ns_client.basic_search_factory(type_name="Campaign",
+                                                            lastModifiedDate=last_modified_date)
+        ps = PaginatedSearch(client=self.ns_client, type_name='Campaign', pageSize=page_size,
+                             search_record=search_record)
+        return self._paginated_search_to_generator(ps)
+
+    def post(self, data) -> OrderedDict:
+        return None
+
+
+class PromotionCode(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='PromotionCode')
+        self.require_lastModified_date = True
+
+    def get_all(self, last_modified_date=None):
+        return self.get_all_generator(last_modified_date=last_modified_date)
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        search_record = self.ns_client.basic_search_factory(type_name="PromotionCode",
+                                                            lastModifiedDate=last_modified_date)
+        ps = PaginatedSearch(client=self.ns_client, type_name='PromotionCode', pageSize=page_size,
+                             search_record=search_record)
+        return self._paginated_search_to_generator(ps)
+
+    def post(self, data) -> OrderedDict:
+        return None
 
 class Customers(ApiBase):
     def __init__(self, ns_client):
@@ -53,6 +90,7 @@ class Customers(ApiBase):
 
     def post(self, data) -> OrderedDict:
         return None
+
 
 class InventoryItem(ApiBase):
     def __init__(self, ns_client):
@@ -76,6 +114,28 @@ class InventoryItem(ApiBase):
         return None
 
 
+class ItemGroup(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='ItemGroup')
+        self.require_lastModified_date = True
+
+    def get_all(self, last_modified_date=None):
+        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
+            last_modified_date=last_modified_date))
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='ItemGroup', operator='contains')
+        search_record = self.ns_client.basic_search_factory(type_name="Item",
+                                                            recordType=record_type_search_field,
+                                                            lastModifiedDate=last_modified_date)
+        ps = PaginatedSearch(client=self.ns_client, type_name='ItemGroup', pageSize=page_size,
+                             search_record=search_record)
+        return self._paginated_search_to_generator(ps)
+
+    def post(self, data) -> OrderedDict:
+        return None
+
+
 class Opportunity(ApiBase):
     def __init__(self, ns_client):
         ApiBase.__init__(self, ns_client=ns_client, type_name='opportunity')
@@ -87,6 +147,28 @@ class Opportunity(ApiBase):
 
     def get_all_generator(self, page_size=100, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='Opportunity', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('Transaction', recordType=record_type_search_field,
+                                                           lastModifiedDate=last_modified_date)
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           basic_search=basic_search,
+                                           type_name='Transaction',
+                                           pageSize=page_size)
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
+    def post(self, data) -> OrderedDict:
+        return None
+
+
+class TransferOrder(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='transferOrder')
+        self.require_lastModified_date = True
+
+    def get_all(self, last_modified_date=None):
+        return self.get_all_generator(last_modified_date=last_modified_date)
+
+    def get_all_generator(self, page_size=100, last_modified_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='TransferOrder', operator='contains')
         basic_search = self.ns_client.basic_search_factory('Transaction', recordType=record_type_search_field,
                                                            lastModifiedDate=last_modified_date)
         paginated_search = PaginatedSearch(client=self.ns_client,
