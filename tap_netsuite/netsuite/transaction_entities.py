@@ -41,8 +41,7 @@ class Customers(ApiBase):
         self.require_lastModified_date = True
 
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         search_record = self.ns_client.basic_search_factory(type_name="Customer",
@@ -60,8 +59,7 @@ class InventoryItem(ApiBase):
         self.require_lastModified_date = True
 
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='InventoryItem', operator='contains')
@@ -82,8 +80,7 @@ class Opportunity(ApiBase):
         self.require_lastModified_date = True
 
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='Opportunity', operator='contains')
@@ -128,8 +125,7 @@ class InventoryTransfer(ApiBase):
         ApiBase.__init__(self, ns_client=ns_client, type_name='InventoryTransfer')
     
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='InventoryTransfer', operator='contains')
@@ -152,8 +148,7 @@ class Items(ApiBase):
         self.require_lastModified_date = True
 
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         search_record = self.ns_client.basic_search_factory(type_name="Item",
@@ -171,8 +166,7 @@ class InventoryAdjustment(ApiBase):
         ApiBase.__init__(self, ns_client=ns_client, type_name='InventoryAdjustment')
     
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='InventoryAdjustment', operator='contains')
@@ -194,8 +188,7 @@ class VendorBills(ApiBase):
         ApiBase.__init__(self, ns_client=ns_client, type_name='VendorBills')
     
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='VendorBill', operator='contains')
@@ -216,8 +209,7 @@ class VendorPayments(ApiBase):
         ApiBase.__init__(self, ns_client=ns_client, type_name='VendorPayment')
     
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='VendorPayment', operator='contains')
@@ -240,8 +232,7 @@ class JournalEntries(ApiBase):
         self.require_lastModified_date = True
 
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='JournalEntry', operator='contains')
@@ -302,8 +293,7 @@ class Invoice(ApiBase):
         self.require_lastModified_date = True
 
     def get_all(self, last_modified_date=None):
-        return list(self.get_all_generator() if last_modified_date is None else self.get_all_generator(
-            last_modified_date=last_modified_date))
+        return self.get_all_generator(last_modified_date=last_modified_date)
 
     def get_all_generator(self, page_size=200, last_modified_date=None):
         record_type_search_field = self.ns_client.SearchStringField(searchValue='Invoice', operator='contains')
