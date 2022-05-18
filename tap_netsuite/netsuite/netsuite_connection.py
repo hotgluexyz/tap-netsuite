@@ -18,14 +18,36 @@ from netsuitesdk.api.price_level import PriceLevel
 import time
 import json
 import singer
-from .transaction_entities import Customers, PurchaseOrder, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem, VendorBills, VendorPayments, SalesOrders, CreditMemos, Items
+from .transaction_entities import (
+    Customers,
+    PurchaseOrder,
+    Invoice,
+    JournalEntries,
+    InventoryTransfer,
+    InventoryAdjustment,
+    InventoryItem,
+    VendorBills,
+    VendorPayments,
+    SalesOrders,
+    CreditMemos,
+    Items,
+    CustomerPayments,
+)
 from .netsuite_client import ExtendedNetSuiteClient
 
 LOGGER = singer.get_logger()
 
 
 class ExtendedNetSuiteConnection:
-    def __init__(self, account, consumer_key, consumer_secret, token_key, token_secret, caching=True):
+    def __init__(
+        self,
+        account,
+        consumer_key,
+        consumer_secret,
+        token_key,
+        token_secret,
+        caching=True,
+    ):
         # NetSuiteConnection.__init__(self, account, consumer_key, consumer_secret, token_key, token_secret)
         # ns_client: NetSuiteClient = self.client
 
@@ -34,7 +56,7 @@ class ExtendedNetSuiteConnection:
             consumer_key=consumer_key,
             consumer_secret=consumer_secret,
             token_key=token_key,
-            token_secret=token_secret
+            token_secret=token_secret,
         )
         self.client = ns_client
         self.departments = Departments(ns_client)
@@ -55,34 +77,37 @@ class ExtendedNetSuiteConnection:
         self.invoice = Invoice(ns_client)
 
         self.entities = {
-            'Customer': Customers(ns_client),
-            'Invoice': Invoice(ns_client),
-            'Accounts': Accounts(ns_client),
-            'JournalEntry': JournalEntries(ns_client),
-            'Commission': JournalEntries(ns_client),
-            'Classifications': Classifications(ns_client),
-            'Vendors': self.vendors,
-            'VendorBills': self.vendor_bills,
-            'VendorPayment': self.vendor_payments,
-            'InventoryAdjustment': InventoryAdjustment(ns_client),
-            'InventoryTransfer': InventoryTransfer(ns_client),
-            'PriceLevel': PriceLevel(ns_client),
-            'InventoryItem': InventoryItem(ns_client),
-            'SalesOrders': SalesOrders(ns_client),
-            'CreditMemos': CreditMemos(ns_client),
-            'Items': Items(ns_client),
-            'PurchaseOrder': PurchaseOrder(ns_client)
+            "Customer": Customers(ns_client),
+            "Invoice": Invoice(ns_client),
+            "Accounts": Accounts(ns_client),
+            "JournalEntry": JournalEntries(ns_client),
+            "Commission": JournalEntries(ns_client),
+            "Classifications": Classifications(ns_client),
+            "Vendors": self.vendors,
+            "VendorBills": self.vendor_bills,
+            "VendorPayment": self.vendor_payments,
+            "InventoryAdjustment": InventoryAdjustment(ns_client),
+            "InventoryTransfer": InventoryTransfer(ns_client),
+            "PriceLevel": PriceLevel(ns_client),
+            "InventoryItem": InventoryItem(ns_client),
+            "SalesOrders": SalesOrders(ns_client),
+            "CreditMemos": CreditMemos(ns_client),
+            "Items": Items(ns_client),
+            "PurchaseOrder": PurchaseOrder(ns_client),
+            "CustomerPayments": CustomerPayments(ns_client),
         }
 
     def _query_entity(self, data, entity, stream):
         to_get_results_for = data.get(stream)
         for element in to_get_results_for:
             start_time = time.time()
-            internal_id = element.get('internalId')
+            internal_id = element.get("internalId")
             LOGGER.info(f"fetching data for internalId {internal_id}")
             to_return = entity.get(internalId=internal_id)
-            LOGGER.info(f"Successfully fetched data for internalId {internal_id} --- %s seconds ---" % (
-                        time.time() - start_time))
+            LOGGER.info(
+                f"Successfully fetched data for internalId {internal_id} --- %s seconds ---"
+                % (time.time() - start_time)
+            )
             yield to_return
 
     def query_entity(self, stream=None, lastModifiedDate=None):
@@ -90,7 +115,10 @@ class ExtendedNetSuiteConnection:
         LOGGER.info(f"Starting fetch data for stream {stream}")
         entity = self.entities[stream]
 
-        if hasattr(entity, 'require_lastModified_date') and entity.require_lastModified_date is True:
+        if (
+            hasattr(entity, "require_lastModified_date")
+            and entity.require_lastModified_date is True
+        ):
             data = entity.get_all(lastModifiedDate)
         else:
             data = entity.get_all()
