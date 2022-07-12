@@ -113,13 +113,11 @@ def sync_records(ns, catalog_entry, state, counter):
             query_result = [query_result]
         else:
             query_result = []
-
     for page in query_result:
         for rec in page:
             counter.increment()
-            with Transformer(pre_hook=transform_data_hook(ns, stream)) as transformer:
-                rec = transformer.transform(serialize_object(rec), schema)
-
+            with Transformer() as transformer:
+                rec = transformer.transform(serialize_object(rec), schema, catalog_metadata)
             singer.write_message(
                 singer.RecordMessage(
                     stream=(
