@@ -116,9 +116,52 @@ class SalesOrders(ApiBase):
         
         return self._paginated_search_to_generator(paginated_search=paginated_search)
 
+
+class CurrencyRate(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='currencyRate')
+        self.require_effectiveDate_date = True
+
+    def get_all(self, effective_date=None):
+        return self.get_all_generator(effective_date=effective_date)
+
+    def get_all_generator(self, page_size=200, effective_date=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='CurrencyRate', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('CurrencyRate',
+                                                           effectiveDate=effective_date,
+                                                           recordType=record_type_search_field)
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           basic_search=basic_search,
+                                           type_name='CurrencyRate',
+                                           pageSize=page_size)
+        
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
     def post(self, data) -> OrderedDict:
         return None
 
+class ConsolidatedExchangeRate(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='consolidatedExchangeRate')
+        self.require_postingPeriod = True
+
+    def get_all(self, posting_period=None):
+        return self.get_all_generator(posting_period=posting_period)
+
+    def get_all_generator(self, page_size=200, posting_period=None):
+        record_type_search_field = self.ns_client.SearchStringField(searchValue='ConsolidatedExchangeRate', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('ConsolidatedExchangeRate',
+                                                           postingPeriod=posting_period,
+                                                           recordType=record_type_search_field)
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           basic_search=basic_search,
+                                           type_name='ConsolidatedExchangeRate',
+                                           pageSize=page_size)
+        
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
+    def post(self, data) -> OrderedDict:
+        return None
 
 class InventoryTransfer(ApiBase):
     def __init__(self, ns_client):
