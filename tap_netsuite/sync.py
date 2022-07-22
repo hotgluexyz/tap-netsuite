@@ -22,15 +22,14 @@ def get_internal_name_by_name(ns, stream):
 
     return to_return
 
-def transform_ordered_dict():
-    def pre_hook(data: dict):
-        for k, v, in data.items():
-            if isinstance(v, OrderedDict):
-                data[k] = json.dumps(v)
-            if isinstance(v, str) and "OrderedDict(" in v:
-                value = eval(v)
-                data[k] = json.dumps(value)
-        return data
+def transform_ordered_dict(record: dict):
+    for k, v, in record.items():
+        if isinstance(v, OrderedDict):
+            record[k] = json.dumps(v)
+        if isinstance(v, str) and "OrderedDict(" in v:
+            value = eval(v)
+            record[k] = json.dumps(value)
+    return record
 
 
 def transform_data_hook(ns, stream):
@@ -127,8 +126,9 @@ def sync_records(ns, catalog_entry, state, counter):
     for page in query_result:
         for rec in page:
             counter.increment()
-            with Transformer(pre_hook=transform_ordered_dict()) as transformer:
+            with Transformer() as transformer:
                 rec = transformer.transform(serialize_object(rec), schema, catalog_metadata)
+                rec = transform_ordered_dict(rec)
             singer.write_message(
                 singer.RecordMessage(
                     stream=(
