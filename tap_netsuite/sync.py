@@ -27,6 +27,9 @@ def transform_ordered_dict():
         for k, v, in data.items():
             if isinstance(v, OrderedDict):
                 data[k] = json.dumps(v)
+            if isinstance(v, str) and "OrderedDict(" in v:
+                value = eval(v)
+                data[k] = json.dumps(value)
         return data
 
 
