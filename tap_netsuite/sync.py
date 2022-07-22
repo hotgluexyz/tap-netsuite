@@ -25,10 +25,10 @@ def get_internal_name_by_name(ns, stream):
 def transform_ordered_dict(record: dict):
     for k, v, in record.items():
         if isinstance(v, OrderedDict):
-            record[k] = json.dumps(v)
+            record[k] = dict(v)
         if isinstance(v, str) and "OrderedDict(" in v:
             value = eval(v)
-            record[k] = json.dumps(value)
+            record[k] = dict(value)
     return record
 
 
