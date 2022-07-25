@@ -24,10 +24,11 @@ def get_internal_name_by_name(ns, stream):
 
 def transform_dict(record: dict):
     for k, v, in record.items():
-        if isinstance(v, str) and "OrderedDict" in v:
-            record[k] = json.loads(eval(v))
-        if isinstance(v, OrderedDict):
-            record[k] = json.dumps(v)
+        if isinstance(v, str) and "{" in v:
+            # record[k] = json.dumps(eval(v)) # will write as json string
+            record[k] = eval(v) # will write as json object
+        # if isinstance(v, OrderedDict):
+        #     record[k] = json.dumps(v)
         # if isinstance(v, str) and "OrderedDict(" in v:
         #     value = eval(v)
         #     record[k] = json.dumps(value)
@@ -131,7 +132,7 @@ def sync_records(ns, catalog_entry, state, counter):
         for rec in page:
             counter.increment()
             with Transformer() as transformer:
-                rec = transformer.transform(serialize_object(rec), schema, catalog_metadata)
+                rec = transformer.transform(serialize_object(rec, target_cls=dict), schema, catalog_metadata)
                 rec = transform_dict(rec)
             singer.write_message(
                 singer.RecordMessage(
