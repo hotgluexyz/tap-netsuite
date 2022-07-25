@@ -26,12 +26,15 @@ def transform_dict(record: dict):
     for k, v, in record.items():
         if isinstance(v, str) and v.startswith("{"):
             record[k] = json.loads(v)
+        if isinstance(v, dict):
+            record[k] = json.dumps(v)
         # if isinstance(v, str) and "OrderedDict(" in v:
         #     value = eval(v)
         #     record[k] = json.dumps(value)
         # if isinstance(v, str) and isinstance(v,eval(v)):
             
     return record
+
 
 def transform_data_hook(ns, stream):
     def pre_hook(data, typ, schema):
