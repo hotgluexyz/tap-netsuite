@@ -26,8 +26,7 @@ def get_internal_name_by_name(ns, stream):
 def transform_str_dict(record: dict):
     for k, v, in record.items():
         if isinstance(v, str) and v.startswith("{"):
-            #record[k] = json.dumps(eval(v))
-            record[k] = dict(eval(v))
+            record[k] = json.dumps(eval(v))
 
     return record
 
