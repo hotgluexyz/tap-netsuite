@@ -120,7 +120,7 @@ class SalesOrders(ApiBase):
 class CurrencyRate(ApiBase):
     def __init__(self, ns_client):
         ApiBase.__init__(self, ns_client=ns_client, type_name='currencyRate')
-        self.require_effectiveDate_date = True
+        self.require_lastModified_date = True
 
     def get_all(self, effective_date=None):
         return self.get_all_generator(effective_date=effective_date)

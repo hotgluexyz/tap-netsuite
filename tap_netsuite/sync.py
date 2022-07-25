@@ -9,7 +9,6 @@ from jsonpath_ng import jsonpath, parse
 import json
 from zeep.helpers import serialize_object
 import types
-
 LOGGER = singer.get_logger()
 
 
@@ -117,7 +116,8 @@ def sync_records(ns, catalog_entry, state, counter):
         for rec in page:
             counter.increment()
             with Transformer() as transformer:
-                rec = transformer.transform(serialize_object(rec), schema, catalog_metadata)
+                rec = transformer.transform(serialize_object(rec, target_cls=dict), schema, catalog_metadata)
+
             singer.write_message(
                 singer.RecordMessage(
                     stream=(
