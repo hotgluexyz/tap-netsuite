@@ -22,11 +22,11 @@ def get_internal_name_by_name(ns, stream):
 
     return to_return
 
-def transform_dict(record: dict):
+
+def transform_str_dict(record: dict):
     for k, v, in record.items():
-        if isinstance(v, str) and "{" in v:
-            #record[k] = json.dumps(eval(v)) # will write as json string
-            record[k] = dict(eval(v)) # will write as json object
+        if isinstance(v, str) and v.startswith("{"):
+            record[k] = dict(eval(v))
     return record
 
 
@@ -126,7 +126,7 @@ def sync_records(ns, catalog_entry, state, counter):
             counter.increment()
             with Transformer() as transformer:
                 rec = transformer.transform(serialize_object(rec, target_cls=dict), schema, catalog_metadata)
-                rec = transform_dict(rec)
+                rec = transform_str_dict(rec)
             singer.write_message(
                 singer.RecordMessage(
                     stream=(
