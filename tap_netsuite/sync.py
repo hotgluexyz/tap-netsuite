@@ -25,15 +25,8 @@ def get_internal_name_by_name(ns, stream):
 def transform_dict(record: dict):
     for k, v, in record.items():
         if isinstance(v, str) and "{" in v:
-            record[k] = json.dumps(eval(v)) # will write as json string
-            # record[k] = eval(v) # will write as json object
-        # if isinstance(v, OrderedDict):
-        #     record[k] = json.dumps(v)
-        # if isinstance(v, str) and "OrderedDict(" in v:
-        #     value = eval(v)
-        #     record[k] = json.dumps(value)
-        # if isinstance(v, str) and isinstance(v,eval(v)):
-            
+            #record[k] = json.dumps(eval(v)) # will write as json string
+            record[k] = dict(eval(v)) # will write as json object
     return record
 
 
