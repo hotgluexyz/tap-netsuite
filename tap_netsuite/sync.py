@@ -9,6 +9,8 @@ from jsonpath_ng import jsonpath, parse
 import json
 from zeep.helpers import serialize_object
 import types
+from collections import OrderedDict
+import json
 LOGGER = singer.get_logger()
 
 
@@ -20,6 +22,17 @@ def get_internal_name_by_name(ns, stream):
 
     return to_return
 
+def transform_dict(record: dict):
+    for k, v, in record.items():
+        eval_v = eval(v)
+        if isinstance(eval_v, OrderedDict) or isinstance(eval_v, dict):
+            record[k] = json.loads(v)
+        # if isinstance(v, str) and "OrderedDict(" in v:
+        #     value = eval(v)
+        #     record[k] = json.dumps(value)
+        # if isinstance(v, str) and isinstance(v,eval(v)):
+            
+    return record
 
 def transform_data_hook(ns, stream):
     def pre_hook(data, typ, schema):
@@ -117,7 +130,7 @@ def sync_records(ns, catalog_entry, state, counter):
             counter.increment()
             with Transformer() as transformer:
                 rec = transformer.transform(serialize_object(rec, target_cls=dict), schema, catalog_metadata)
-
+                rec = transform_dict(rec)
             singer.write_message(
                 singer.RecordMessage(
                     stream=(
