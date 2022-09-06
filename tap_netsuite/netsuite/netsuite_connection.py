@@ -25,11 +25,11 @@ LOGGER = singer.get_logger()
 
 
 class ExtendedNetSuiteConnection:
-    def __init__(self, account, consumer_key, consumer_secret, token_key, token_secret, caching=True):
+    def __init__(self, account, consumer_key, consumer_secret, token_key, token_secret, fetch_child=True, caching=True):
         # NetSuiteConnection.__init__(self, account, consumer_key, consumer_secret, token_key, token_secret)
         # ns_client: NetSuiteClient = self.client
 
-        ns_client = ExtendedNetSuiteClient(account=account, caching=caching)
+        ns_client = ExtendedNetSuiteClient(account=account, fetch_child=fetch_child, caching=caching)
         ns_client.connect_tba(
             consumer_key=consumer_key,
             consumer_secret=consumer_secret,

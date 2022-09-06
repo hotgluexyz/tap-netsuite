@@ -263,6 +263,7 @@ def main_impl():
                       ns_consumer_secret=CONFIG.get('ns_consumer_secret'),
                       ns_token_key=CONFIG.get('ns_token_key'),
                       ns_token_secret=CONFIG.get('ns_token_secret'),
+                      fetch_child=CONFIG.get('fetch_child', True),
                       is_sandbox=CONFIG.get('is_sandbox'),
                       default_start_date=CONFIG.get('start_date'),
                       select_fields_by_default=CONFIG.get('select_fields_by_default'), )
