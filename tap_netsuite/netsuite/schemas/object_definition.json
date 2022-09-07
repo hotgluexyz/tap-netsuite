@@ -18,7 +18,8 @@
     {"displayName": "Name", "name": "acctName", "type": "string"},
     {"displayName": "Description", "name": "description", "type": "string"},
     {"displayName": "CurrencyRef", "name": "currency", "type": "string"},
-    {"displayName": "Id", "name": "internalId", "type": "string"}
+    {"displayName": "Id", "name": "internalId", "type": "string"},
+    {"displayName": "SubsidiaryList", "name": "subsidiaryList", "type": "string"}
   ],
   "Vendors": [
     {"displayName": "Active", "name": "isInactive", "type": "boolean"},
