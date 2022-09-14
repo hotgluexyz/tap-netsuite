@@ -71,7 +71,8 @@ class ExtendedNetSuiteConnection:
             'SalesOrders': SalesOrders(ns_client),
             'CreditMemos': CreditMemos(ns_client),
             'Items': Items(ns_client),
-            'PurchaseOrder': PurchaseOrder(ns_client)
+            'PurchaseOrder': PurchaseOrder(ns_client),
+            "Subsidiaries": self.subsidiaries
         }
 
     def _query_entity(self, data, entity, stream):
