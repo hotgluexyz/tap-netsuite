@@ -14,6 +14,7 @@ from netsuitesdk.api.expense_categories import ExpenseCategory
 from netsuitesdk.api.custom_lists import CustomLists
 from netsuitesdk.api.custom_records import CustomRecords
 from netsuitesdk.api.price_level import PriceLevel
+from netsuitesdk.api.tax_items import TaxItems
 
 import time
 import json
@@ -72,7 +73,8 @@ class ExtendedNetSuiteConnection:
             'CreditMemos': CreditMemos(ns_client),
             'Items': Items(ns_client),
             'PurchaseOrder': PurchaseOrder(ns_client),
-            "Subsidiaries": self.subsidiaries
+            "Subsidiaries": self.subsidiaries,
+            "TaxItems": TaxItems(ns_client)
         }
 
     def _query_entity(self, data, entity, stream):
