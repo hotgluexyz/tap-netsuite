@@ -97,6 +97,7 @@ class NetSuite:
                  ns_consumer_secret=None,
                  ns_token_key=None,
                  ns_token_secret=None,
+                 fetch_child=None,
                  is_sandbox=True,
                  select_fields_by_default=None,
                  default_start_date=None):
@@ -106,6 +107,7 @@ class NetSuite:
         self.ns_consumer_secret = ns_consumer_secret
         self.ns_token_key = ns_token_key
         self.ns_token_secret = ns_token_secret
+        self.ns_fetch_child = fetch_child
         self.is_sandbox = is_sandbox
         self.select_fields_by_default = select_fields_by_default is True or (
                 isinstance(select_fields_by_default, str) and select_fields_by_default.lower() == 'true')
@@ -136,6 +138,7 @@ class NetSuite:
             consumer_secret=self.ns_consumer_secret,
             token_key=self.ns_token_key,
             token_secret=self.ns_token_secret,
+            fetch_child=self.ns_fetch_child,
             caching=caching
         )
         self.ns_client = nc

@@ -14,6 +14,7 @@ from netsuitesdk.api.expense_categories import ExpenseCategory
 from netsuitesdk.api.custom_lists import CustomLists
 from netsuitesdk.api.custom_records import CustomRecords
 from netsuitesdk.api.price_level import PriceLevel
+from netsuitesdk.api.tax_items import TaxItems
 
 import time
 import json
@@ -25,11 +26,11 @@ LOGGER = singer.get_logger()
 
 
 class ExtendedNetSuiteConnection:
-    def __init__(self, account, consumer_key, consumer_secret, token_key, token_secret, caching=True):
+    def __init__(self, account, consumer_key, consumer_secret, token_key, token_secret, fetch_child=True, caching=True):
         # NetSuiteConnection.__init__(self, account, consumer_key, consumer_secret, token_key, token_secret)
         # ns_client: NetSuiteClient = self.client
 
-        ns_client = ExtendedNetSuiteClient(account=account, caching=caching)
+        ns_client = ExtendedNetSuiteClient(account=account, fetch_child=fetch_child, caching=caching)
         ns_client.connect_tba(
             consumer_key=consumer_key,
             consumer_secret=consumer_secret,
@@ -72,6 +73,8 @@ class ExtendedNetSuiteConnection:
             'CreditMemos': CreditMemos(ns_client),
             'Items': Items(ns_client),
             'PurchaseOrder': PurchaseOrder(ns_client),
+            "Subsidiaries": self.subsidiaries,
+            "TaxItems": TaxItems(ns_client),
             'WorkOrder': WorkOrder(ns_client)
         }
 
