@@ -60,7 +60,7 @@ class ExtendedNetSuiteConnection:
             'Customer': Customers(ns_client),
             'Invoice': Invoice(ns_client),
             'Accounts': Accounts(ns_client),
-            'JournalEntry': JournalEntries(ns_client),
+            'JournalEntries': JournalEntries(ns_client),
             'Commission': JournalEntries(ns_client),
             'Classifications': Classifications(ns_client),
             'Vendors': self.vendors,
