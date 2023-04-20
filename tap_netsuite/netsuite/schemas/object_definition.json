@@ -7,7 +7,7 @@
     {"displayName": "Status", "name": "entityStatus", "type": "string"},
     {"displayName": "Email", "name": "email", "type": "string"},
     {"displayName": "DateCreated", "name": "dateCreated", "type": "datetime"},
-    {"displayName": "address", "name": "defaultAddress", "type": "string"},
+    {"displayName": "Address", "name": "defaultAddress", "type": "string"},
     {"displayName": "Subsidiary", "name": "subsidiary", "type": "string"},
     {"displayName": "CustomFieldList", "name": "customFieldList", "type": "string"}
   ],
