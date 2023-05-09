@@ -163,6 +163,7 @@ class SalesOrders(ApiBase):
 class InventoryTransfer(ApiBase):
     def __init__(self, ns_client):
         ApiBase.__init__(self, ns_client=ns_client, type_name='InventoryTransfer')
+        self.require_lastModified_date = True
     
     def get_all(self, last_modified_date=None):
         return self.get_all_generator(last_modified_date=last_modified_date)
@@ -204,6 +205,7 @@ class Items(ApiBase):
 class InventoryAdjustment(ApiBase):
     def __init__(self, ns_client):
         ApiBase.__init__(self, ns_client=ns_client, type_name='InventoryAdjustment')
+        self.require_lastModified_date = True
     
     def get_all(self, last_modified_date=None):
         return self.get_all_generator(last_modified_date=last_modified_date)
@@ -226,6 +228,7 @@ class InventoryAdjustment(ApiBase):
 class VendorBills(ApiBase):
     def __init__(self, ns_client):
         ApiBase.__init__(self, ns_client=ns_client, type_name='VendorBills')
+        self.require_lastModified_date = True
     
     def get_all(self, last_modified_date=None):
         return self.get_all_generator(last_modified_date=last_modified_date)
@@ -247,6 +250,7 @@ class VendorBills(ApiBase):
 class VendorPayments(ApiBase):
     def __init__(self, ns_client):
         ApiBase.__init__(self, ns_client=ns_client, type_name='VendorPayment')
+        self.require_lastModified_date = True
     
     def get_all(self, last_modified_date=None):
         return self.get_all_generator(last_modified_date=last_modified_date)
