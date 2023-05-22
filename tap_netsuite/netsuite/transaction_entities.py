@@ -136,6 +136,25 @@ class BankAccounts(ApiBase):
         return self._paginated_search_to_generator(paginated_search=paginated_search)
 
 
+class Locations(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='location')
+        self.require_lastModified_date = True
+
+    def get_all(self, last_modified_date=None):
+        return self.get_all_generator(last_modified_date=last_modified_date)
+
+    def get_all_generator(self, page_size=200, last_modified_date=None):
+        search_field = self.ns_client.SearchStringField(searchValue='Location', operator='contains')
+        basic_search = self.ns_client.basic_search_factory('Location',
+                                                            recordType=search_field,
+                                                           lastModifiedDate=last_modified_date)
+        paginated_search = PaginatedSearch(client=self.ns_client,
+                                           basic_search=basic_search,
+                                           type_name='Location',
+                                           pageSize=page_size)
+        return self._paginated_search_to_generator(paginated_search=paginated_search)
+
 class SalesOrders(ApiBase):
     def __init__(self, ns_client):
         ApiBase.__init__(self, ns_client=ns_client, type_name='salesOrder')
