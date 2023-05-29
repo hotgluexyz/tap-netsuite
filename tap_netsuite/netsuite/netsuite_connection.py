@@ -20,7 +20,7 @@ from netsuitesdk.api.projects import Projects
 import time
 import json
 import singer
-from .transaction_entities import Customers, PurchaseOrder, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem, VendorBills, VendorPayments, SalesOrders, CreditMemos, Items, InboundShipment, BankAccounts
+from .transaction_entities import Customers, PurchaseOrder, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem, VendorBills, VendorPayments, SalesOrders, CreditMemos, Items, InboundShipment, BankAccounts, Locations
 from .netsuite_client import ExtendedNetSuiteClient
 
 LOGGER = singer.get_logger()
@@ -79,6 +79,7 @@ class ExtendedNetSuiteConnection:
             "InboundShipment": InboundShipment(ns_client),
             "Projects": Projects(ns_client),
             "BankAccounts": BankAccounts(ns_client),
+            "Locations": Locations(ns_client),
         }
 
     def _query_entity(self, data, entity, stream):
