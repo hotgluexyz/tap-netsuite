@@ -124,7 +124,11 @@
     {"displayName": "Phone", "name": "phone", "type": "string"},
     {"displayName": "FirstName", "name": "firstName", "type": "string"},
     {"displayName": "LastName", "name": "lastName", "type": "string"},
-    {"displayName": "EntityId", "name": "entityId", "type": "string"}
+    {"displayName": "EntityId", "name": "entityId", "type": "string"},
+    {"displayName": "AddressBookList", "name": "addressbookList", "type": "string"},
+    {"displayName": "Fax", "name": "fax", "type": "string"},
+    {"displayName": "Url", "name": "url", "type": "string"},
+    {"displayName": "Email", "name": "email", "type": "string"}
   ],
   "VendorBills": [
     {"displayName": "Id", "name": "internalId", "type": "string"},
