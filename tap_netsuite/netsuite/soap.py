@@ -22,4 +22,4 @@ class Soap:
         return self.ns_client.query_entity(stream,
                                            {'searchValue': start_date_str,
                                             'type': 'dateTime',
-                                            'operator': 'onOrAfter'})
+                                            'operator': 'after'})
