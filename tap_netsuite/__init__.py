@@ -5,6 +5,7 @@ import singer
 import singer.utils as singer_utils
 from singer import metadata, metrics
 import tap_netsuite.netsuite as netsuite
+from copy import deepcopy
 from tap_netsuite.netsuite import NetSuite
 from tap_netsuite.netsuite.exceptions import TapNetSuiteException, TapNetSuiteQuotaExceededException
 from tap_netsuite.sync import (sync_stream, get_stream_version)
@@ -104,6 +105,19 @@ def do_sync(ns, catalog, state):
         stream = catalog_entry['stream']
         stream_alias = catalog_entry.get('stream_alias')
         stream_name = catalog_entry["tap_stream_id"]
+        stream_list = [item["stream"] for item in catalog["streams"]]
+        nested_streams = [stream + key for key in catalog_entry['schema']['properties'].keys() if stream + key in stream_list]
+        nested_streams_convert = {}
+
+        for nested_stream in nested_streams:
+            original_key = nested_stream.replace(stream, "")
+            nested_streams_convert[original_key] = catalog["streams"][stream_list.index(nested_stream)]
+        
+        modified_catalog_entry = deepcopy(catalog_entry)
+        for key, value in nested_streams_convert.items():
+            value["schema"]["type"] = ["null", "object"]
+            modified_catalog_entry["schema"]["properties"][key] = value["schema"]
+        
         activate_version_message = singer.ActivateVersionMessage(
             stream=(stream_alias or stream), version=stream_version)
 
@@ -131,7 +145,7 @@ def do_sync(ns, catalog, state):
         key_properties = metadata.to_map(catalog_entry['metadata']).get((), {}).get('table-key-properties')
         singer.write_schema(
             stream,
-            catalog_entry['schema'],
+            modified_catalog_entry['schema'],
             key_properties,
             replication_key,
             stream_alias)
@@ -168,7 +182,7 @@ def do_sync(ns, catalog, state):
                                               catalog_entry['tap_stream_id'],
                                               'version',
                                               stream_version)
-            counter = sync_stream(ns, catalog_entry, state)
+            counter = sync_stream(ns, catalog_entry, state, catalog=catalog)
             LOGGER.info("%s: Completed sync (%s rows)", stream_name, counter.value)
 
     state["current_stream"] = None
