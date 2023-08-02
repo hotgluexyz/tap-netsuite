@@ -21,6 +21,23 @@
     {"displayName": "Subsidiary", "name": "subsidiary", "type": "string"},
     {"displayName": "CustomFieldList", "name": "customFieldList", "type": "string"}
   ],
+  "Contact": [
+    {"displayName": "Id", "name": "internalId", "type": "string"},
+    {"displayName": "Company", "name": "company", "type": "string"},
+    {"displayName": "FirstName", "name": "firstName", "type": "string"},
+    {"displayName": "MiddleName", "name": "middleName", "type": "string"},
+    {"displayName": "LastName", "name": "lastName", "type": "string"},
+    {"displayName": "Email", "name": "email", "type": "string"},
+    {"displayName": "Phone", "name": "phone", "type": "string"},
+    {"displayName": "MobilePhone", "name": "mobilePhone", "type": "string"},
+    {"displayName": "LastModifiedDate", "name": "lastModifiedDate", "type": "string"}
+  ],
+  "ContactCompany": [
+    {"displayName": "Name", "name": "name", "type": "string"},
+    {"displayName": "InternalId", "name": "internalId", "type": "string"},
+    {"displayName": "ExternalId", "name": "externalId", "type": "string"},
+    {"displayName": "Type", "name": "type", "type": "string"}
+  ],
   "TaxItems": [
     {"displayName": "Id", "name": "internalId", "type": "string"},
     {"displayName": "ItemId", "name": "itemId", "type": "string"},
