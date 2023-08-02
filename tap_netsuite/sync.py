@@ -3,6 +3,7 @@ import dateutil.parser as parser
 import datetime
 import singer
 import singer.utils as singer_utils
+from collections import OrderedDict
 from singer import Transformer, metadata, metrics
 from requests.exceptions import RequestException
 from jsonpath_ng import jsonpath, parse
@@ -119,6 +120,8 @@ def sync_records(ns, catalog_entry, state, counter, catalog=None):
             counter.increment()
             with Transformer(pre_hook=transform_data_hook(ns, stream, catalog)) as transformer:
                 original_rec = serialize_object(rec)
+                if isinstance(original_rec, OrderedDict):
+                    original_rec = dict(original_rec)
                 rec = transformer.transform(original_rec, schema)
                 for key in rec.keys():
                     # Here we are getting nested schemas for nested objects inside another schema

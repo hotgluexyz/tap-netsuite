@@ -23,7 +23,7 @@
   ],
   "Contact": [
     {"displayName": "Id", "name": "internalId", "type": "string"},
-    {"displayName": "Company", "name": "company", "type": "object"},
+    {"displayName": "Company", "name": "company", "type": "string"},
     {"displayName": "FirstName", "name": "firstName", "type": "string"},
     {"displayName": "MiddleName", "name": "middleName", "type": "string"},
     {"displayName": "LastName", "name": "lastName", "type": "string"},
