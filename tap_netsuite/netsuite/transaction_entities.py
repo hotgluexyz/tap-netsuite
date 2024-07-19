@@ -52,6 +52,21 @@ class Customers(ApiBase):
 
     def post(self, data) -> OrderedDict:
         return None
+    
+
+class Contacts(ApiBase):
+    def __init__(self, ns_client):
+        ApiBase.__init__(self, ns_client=ns_client, type_name='Contact')
+        self.require_lastModified_date = False
+
+    def get_all(self, last_modified_date=None):
+        return self.get_all_generator()
+
+    def get_all_generator(self, page_size=200, last_modified_date=None):
+        search_record = self.ns_client.basic_search_factory(type_name=self.type_name)
+        ps = PaginatedSearch(client=self.ns_client, type_name=self.type_name, pageSize=page_size,
+                             search_record=search_record)
+        return self._paginated_search_to_generator(ps)
 
 
 class InboundShipment(ApiBase):
