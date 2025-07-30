@@ -1,6 +1,9 @@
 # tap-netsuite
 
-[Singer](https://www.singer.io/) tap that extracts data from a [NetSuite](https://www.netsuite.com/) database and produces JSON-formatted data following the [Singer spec](https://github.com/singer-io/getting-started/blob/master/SPEC.md).
+**Tap-Netsuite** tap is a Singer Tap that extracts data from a [NetSuite](https://www.netsuite.com/) database and produces JSON-formatted data following the [Singer spec](https://github.com/singer-io/getting-started/blob/master/SPEC.md).
+
+Tap-Netsuite is built to be run on [Hotglue](https://hotglue.com), an embedded integration platform for running Singer Taps and Targets.
+
 
 ```bash
 $ python3 -m venv env/tap-netsuite
