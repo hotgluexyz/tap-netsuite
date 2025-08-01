@@ -90,17 +90,19 @@ def field_to_property_schema(field):  # pylint:disable=too-many-branches
 
 
 class NetSuite:
-
-    def __init__(self,
-                 ns_account=None,
-                 ns_consumer_key=None,
-                 ns_consumer_secret=None,
-                 ns_token_key=None,
-                 ns_token_secret=None,
-                 fetch_child=None,
-                 is_sandbox=True,
-                 select_fields_by_default=None,
-                 default_start_date=None):
+    def __init__(
+        self,
+        ns_account=None,
+        ns_consumer_key=None,
+        ns_consumer_secret=None,
+        ns_token_key=None,
+        ns_token_secret=None,
+        fetch_child=None,
+        is_sandbox=True,
+        select_fields_by_default=None,
+        default_start_date=None,
+        page_size: int = 500,
+    ):
 
         self.ns_account = ns_account
         self.ns_consumer_key = ns_consumer_key
@@ -109,6 +111,7 @@ class NetSuite:
         self.ns_token_secret = ns_token_secret
         self.ns_fetch_child = fetch_child
         self.is_sandbox = is_sandbox
+        self.page_size = page_size
         self.select_fields_by_default = select_fields_by_default is True or (
                 isinstance(select_fields_by_default, str) and select_fields_by_default.lower() == 'true')
 
@@ -139,7 +142,8 @@ class NetSuite:
             token_key=self.ns_token_key,
             token_secret=self.ns_token_secret,
             fetch_child=self.ns_fetch_child,
-            caching=caching
+            caching=caching,
+            page_size=self.page_size,
         )
         self.ns_client = nc
 
