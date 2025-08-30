@@ -3,6 +3,7 @@ import dateutil.parser as parser
 import datetime
 import singer
 import singer.utils as singer_utils
+from collections import OrderedDict
 from singer import Transformer, metadata, metrics
 from requests.exceptions import RequestException
 from jsonpath_ng import jsonpath, parse
@@ -22,8 +23,8 @@ def get_internal_name_by_name(ns, stream):
     return to_return
 
 
-def transform_data_hook(ns, stream):
-    def pre_hook(data, typ, schema):
+def transform_data_hook(ns, stream, catalog):
+    def pre_hook(data, typ, schema, nested=False):
         internal_name_by_property = get_internal_name_by_name(ns, stream)
         result = data
         if isinstance(data, dict):
@@ -71,12 +72,12 @@ def get_stream_version(catalog_entry, state):
     return int(time.time() * 1000)
 
 
-def sync_stream(ns, catalog_entry, state):
+def sync_stream(ns, catalog_entry, state, catalog):
     stream = catalog_entry['stream']
 
     with metrics.record_counter(stream) as counter:
         try:
-            sync_records(ns, catalog_entry, state, counter)
+            sync_records(ns, catalog_entry, state, counter, catalog=catalog)
             singer.write_state(state)
         except RequestException as ex:
             raise Exception("Error syncing {}: {} Response: {}".format(
@@ -88,7 +89,7 @@ def sync_stream(ns, catalog_entry, state):
         return counter
 
 
-def sync_records(ns, catalog_entry, state, counter):
+def sync_records(ns, catalog_entry, state, counter, catalog=None):
     chunked_bookmark = singer_utils.strptime_with_tz(ns.get_start_date(state, catalog_entry))
     stream = catalog_entry['stream']
     schema = catalog_entry['schema']
@@ -113,12 +114,26 @@ def sync_records(ns, catalog_entry, state, counter):
             query_result = [query_result]
         else:
             query_result = []
-
+    transformed_catalog = {item["stream"]: item["schema"] for item in catalog["streams"]}
     for page in query_result:
         for rec in page:
             counter.increment()
-            with Transformer(pre_hook=transform_data_hook(ns, stream)) as transformer:
-                rec = transformer.transform(serialize_object(rec), schema)
+            with Transformer(pre_hook=transform_data_hook(ns, stream, catalog)) as transformer:
+                original_rec = serialize_object(rec)
+                if isinstance(original_rec, OrderedDict):
+                    original_rec = dict(original_rec)
+                rec = transformer.transform(original_rec, schema)
+                for key in rec.keys():
+                    # Here we are getting nested schemas for nested objects inside another schema
+                    # We are looking for ParentSchemaName + ChildSchemaName in the catalog
+                    # making it extensible for other nested objects
+                    nested_stream_name = stream + key[0].upper() + key[1:]
+                    if nested_stream_name in transformed_catalog and original_rec.get(key[0].lower() + key[1:]) is not None:
+                        with Transformer(pre_hook=transform_data_hook(ns, nested_stream_name, catalog)) as sub_transformer:
+                            rec[key] = sub_transformer.transform(
+                                original_rec.get(key[0].lower() + key[1:]),
+                                transformed_catalog[nested_stream_name]
+                            )
 
             singer.write_message(
                 singer.RecordMessage(
