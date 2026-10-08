@@ -225,9 +225,8 @@ def do_discover(ns):
                 mdata,
                 (),
                 'forced-replication-method',
-                {
-                    'replication-method': 'FULL_TABLE',
-                    'reason': 'No replication keys found from the NetSuite API'})
+                'FULL_TABLE'
+            )
 
         mdata = metadata.write(mdata, (), 'table-key-properties', key_properties)
 
