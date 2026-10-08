@@ -272,8 +272,11 @@ def main_impl():
 
         if args.discover:
             do_discover(ns)
-        elif args.properties:
-            catalog = args.properties
+        elif args.catalog or args.properties:
+            if args.catalog:
+                catalog = args.catalog.to_dict()
+            else:
+                catalog = args.properties
             state = build_state(args.state, catalog)
             do_sync(ns, catalog, state)
     finally:
