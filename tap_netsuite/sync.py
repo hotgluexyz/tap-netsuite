@@ -1,11 +1,9 @@
 import time
-import dateutil.parser as parser
 import datetime
 import singer
 import singer.utils as singer_utils
 from singer import Transformer, metadata, metrics
 from requests.exceptions import RequestException
-from jsonpath_ng import jsonpath, parse
 import json
 from zeep.helpers import serialize_object
 import types
@@ -89,7 +87,6 @@ def sync_stream(ns, catalog_entry, state):
 
 
 def sync_records(ns, catalog_entry, state, counter):
-    chunked_bookmark = singer_utils.strptime_with_tz(ns.get_start_date(state, catalog_entry))
     stream = catalog_entry['stream']
     schema = catalog_entry['schema']
     stream_alias = catalog_entry.get('stream_alias')
