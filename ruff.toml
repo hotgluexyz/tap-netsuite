@@ -1,0 +1,19 @@
+target-version = "py37"
+line-length = 100
+
+exclude = [
+    ".git",
+    "__pycache__",
+    ".tox",
+    ".venv",
+    "build",
+    "dist",
+    "venv",
+]
+
+[lint]
+extend-select = ["C901"]
+ignore = ["E731"]
+
+[lint.mccabe]
+max-complexity = 12

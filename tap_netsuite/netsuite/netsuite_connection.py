@@ -2,7 +2,6 @@ from netsuitesdk.api.accounts import Accounts
 from netsuitesdk.api.classifications import Classifications
 from netsuitesdk.api.departments import Departments
 from netsuitesdk.api.currencies import Currencies
-from netsuitesdk.api.locations import Locations
 from netsuitesdk.api.vendors import Vendors
 from netsuitesdk.api.subsidiaries import Subsidiaries
 from netsuitesdk.api.employees import Employees
@@ -15,10 +14,8 @@ from netsuitesdk.api.custom_lists import CustomLists
 from netsuitesdk.api.custom_records import CustomRecords
 from netsuitesdk.api.price_level import PriceLevel
 from netsuitesdk.api.tax_items import TaxItems
-from netsuitesdk.api.projects import Projects
 
 import time
-import json
 import singer
 from .transaction_entities import Customers, PurchaseOrder, Invoice, JournalEntries, InventoryTransfer, InventoryAdjustment, InventoryItem, VendorBills, VendorPayments, SalesOrders, CreditMemos, Items, InboundShipment, BankAccounts, Locations
 from .netsuite_client import ExtendedNetSuiteClient

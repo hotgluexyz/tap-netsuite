@@ -25,7 +25,7 @@ def prepare_custom_fields(that, eod):
                     that.ns_client.SelectCustomFieldRef(
                         scriptId=field['scriptId'] if 'scriptId' in field else None,
                         internalId=field['internalId'] if 'internalId' in field else None,
-                        value=self.ns_client.ListOrRecordRef(
+                        value=that.ns_client.ListOrRecordRef(
                             internalId=field['value']
                         )
                     )
