@@ -32,7 +32,8 @@ $ tap-netsuite --config config.json --properties properties.json --state state.j
   "ns_token_secret" :"netsuite_token_secret",
   "select_fields_by_default": true,
   "is_sandbox": true / false,
-  "start_date": "2019-09-02T00:00:00Z"
+  "start_date": "2019-09-02T00:00:00Z",
+  "page_size": 500
 }
 ```
 The `ns_account` is your account Id. This can be found under Setup -> Company -> Company Information. Look for Account Id. Note "_SB" is for Sandbox account.
@@ -42,6 +43,8 @@ The `ns_consumer_key`, `ns_consumer_secret`, `ns_token_key` and `ns_token_secret
 The `start_date` is used by the tap as a bound on SOAP requests when searching for records.  This should be an [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) formatted date-time, like "2018-01-08T00:00:00Z". For more details, see the [Singer best practices for dates](https://github.com/singer-io/getting-started/blob/master/BEST_PRACTICES.md#dates).
 
 The `is_sandbox` should always be set to "false" if you are connecting Production account of NetSuite. Set it to "true" if you want to connect to SandBox acccount.
+
+The `page_size` parameter defines the number of records to be retrieved per query. Please reduce the size when your query response exceed the NetSuite maximum payload size.
 
 When new fields are discovered in NetSuite objects, the `select_fields_by_default` key describes whether or not the tap will select those fields by default.
 
